@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <!--
+          <name="viewport" content="width=device-width, initial-scale=1.0">
+          <meta http-equiv="X-UA-Compatible" content="IE=Edge">  
+          <script src= 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+        -->
+        {% load static %}
+        <!-- The line above tells Django to be ready to listen for static files -->
+        <link rel="stylesheet" href="{% static 'css/belt2/belt2.css' %}" media="screen" title="no title"  charset="utf-8">
+        <title>Update Appointment</title>
+     </head>
+    
+     <body>
+
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{message}}</p>
+            {% endfor %}
+        {% endif %}
+
+      <a href="/logout">logout</a> <br><br>
+
+        <h1>Hello, {{request.session.first_name}}</h1>
+        <!-- <h2>Here are your appointments for {% now "SHORT_DATE_FORMAT" %}:</h2> -->
+        
+
+        <h2>Quotable Quotes:</h2> 
+        <table>
+            <tr>
+                <th>Quotes</th>
+                <th>Posted By</th>
+                <th>Action</th>
+            </tr>
+            {% for quote in quotes %}
+            <tr>
+                <td>
+                    <p>{{quote.message}}</p>
+                </td>
+                <td>
+                    <form action='{{quote.id}}/show' method='post'>
+                        {% csrf_token %}
+                        <input type='submit' value='{{quote.by}}'>
+                    </form>
+                </td> 
+                <td>   
+                    <form action='{{quote.id}}/listadd' method='post'>
+                        {% csrf_token %}
+                        <input type='submit' value='Add to My List'>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h2>My Favorites:</h2> 
+            <table>
+                <tr>
+                    <th>Quote</th>
+                    <th>Posted By</th>
+                    <th>Action</th>
+                </tr>
+            {% for fav in myquotes %}
+                <tr>
+                    <td>
+                        <p>{{fav.message}}</p>
+                    </td>
+                    <td>
+                        <form action='{{fav.id}}/show' method='post'>
+                            {% csrf_token %}
+                            <input type='submit' value='{{fav.by}}'>
+                        </form>
+                    </td> 
+                    <td>   
+                        <form action='{{fav.id}}/listremove' method='post'>
+                            {% csrf_token %}
+                            <input type='submit' value='Remove from My List'>
+                        </form>
+                    </td>
+                       </tr>
+            {% endfor %}
+        </table><br><br>
+
+        <h1> Contribute a Quote</h1>
+        <form action='/add' method='post'>
+            {% csrf_token %}
+            Quoted By:  <input type="text" name="addby"><br><br>
+            Message:  <input type="text" name="addmessage"><br>
+            <input type='submit' value='Submit'>
+        </form>
+        
+        </div>
+    
+    </body>
+</html>

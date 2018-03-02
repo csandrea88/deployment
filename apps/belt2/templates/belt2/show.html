@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title></title>
+      <meta charset="UTF-8">
+
+      {% load static %}
+        <!-- The line above tells Django to be ready to listen for static files -->
+        <!--link rel="stylesheet" href="{% static 'logreg/css/logreg.css' %}" media="screen" title="no title"  charset="utf-8"-->
+            
+        <title>Display a Quote</title>
+
+   </head>
+   <body>
+<!-- 
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{message}}</p>
+        {% endfor %}
+    {% endif %} -->
+
+     <a href="/belt2">Dashboard | </a><a href="/logout">logout</a>
+     
+     <h3>Posts by {{quoteby}}</h3>
+     <h2>Count: {{ quotes|length }} </h2>
+
+     {% for quote in quotes %}
+        <p>{{quote.message}}</p>
+     {% endfor %}
+
+  </body>
+</html>

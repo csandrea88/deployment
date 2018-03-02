@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        {% load static %}
+        <!-- The line above tells Django to be ready to listen for static files -->
+        <link rel="stylesheet" href="{% static 'css/belt2/belt2.css' %}" media="screen" title="no title"  charset="utf-8">
+          
+        <title>Login or Registration Form</title>
+  
+     </head>
+    <body>
+
+        <h3>Login or Registration Form</h3>
+
+    
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="red" >{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        
+        
+        <form action='/register' method='post'>
+            {% csrf_token %}
+            <label for="first_name">First Name:</label> <input type='text' name='fname'><br><br>
+            <label for="last_name">Last Name:</label> <input type='text' name='lname'><br><br>
+            <label for="Email">Email:</label> <input type='text' name='email'><br><br>
+            <label for="Bday">Birthday:</label> <input type='date' name='bday'><br><br>
+            <label for="Password">Password:</label> <input type='password' name='password'><br><br>
+            <p>*Password should be at least 8 charachters</p>
+            <label for="Confirm">Confirm:</label> <input type='password' name='cpassword'><br><br>
+            <input type='submit' value='Register'>
+        </form><br><br><br>
+
+        <form action='/login' method='post'>
+            {% csrf_token %}
+            <label for="email">Email: <input type='text' name='email'></label><br><br>
+            <label for="password">Password:</label> <input type='text' name='password'><br><br>
+            <input type='submit' value='Login'>
+        </form> <br><br>
+
+        <form action='/logout' method='post'>
+            {% csrf_token %}
+            <input type='submit' value='Logout'>
+        </form>
+    </body>
+</html>
