@@ -2,7 +2,7 @@ bcrypt==3.1.4
 certifi==2018.1.18
 cffi==1.11.4
 chardet==3.0.4
-Django==1.10
+Django==1.11.29
 idna==2.6
 pycparser==2.18
 requests==2.18.4
